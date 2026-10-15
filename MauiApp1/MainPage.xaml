@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             xmlns:vm="clr-namespace:MauiApp1.ViewModels"
+             x:Class="MauiApp1.MainPage"
+             Title="MainView"
+             Shell.NavBarIsVisible="True"
+             Shell.BackgroundColor="#512BD4"
+             Shell.TitleColor="White">
+
+	<ContentPage.BindingContext>
+		<vm:MainViewModel />
+	</ContentPage.BindingContext>
+
+	<Grid RowDefinitions="*, Auto">
+
+		<!-- Map Control -->
+		<maps:Map x:Name="TrackMap"
+                  Grid.Row="0"
+                  IsShowingUser="True" />
+
+		<!-- Bottom Actions Bar -->
+		<Border Grid.Row="1"
+                Padding="12,8"
+                BackgroundColor="#512BD4">
+			<Grid ColumnDefinitions="*, *, *">
+				<Button Grid.Column="0"
+                        Text="{Binding TrackingButtonText}"
+                        Command="{Binding ToggleTrackingCommand}"
+                        BackgroundColor="#FFFFFF"
+                        TextColor="#512BD4"
+                        FontAttributes="Bold"
+                        Margin="4,0" />
+
+				<Button Grid.Column="1"
+                        Text="Refresh Map"
+                        Command="{Binding RefreshHeatMapCommand}"
+                        BackgroundColor="#FFFFFF"
+                        TextColor="#512BD4"
+                        FontAttributes="Bold"
+                        Margin="4,0" />
+
+				<Button Grid.Column="2"
+                        Text="Clear"
+                        Command="{Binding ClearDataCommand}"
+                        BackgroundColor="#FF3B30"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        Margin="4,0" />
+			</Grid>
+		</Border>
+
+	</Grid>
+</ContentPage>
