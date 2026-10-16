@@ -1,19 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-	<application android:allowBackup="true"
-                 android:icon="@mipmap/appicon"
-                 android:supportsRtl="true">
 
-		<!-- Google Maps API Key requirement -->
-		<meta-data android:name="com.google.android.geo.API_KEY"
-                   android:value="AIzaSyDek-oJx22oXKR8h7uRX9MaTnWNiUBH2xU" />
+	<!-- ================================================================= -->
+	<!-- APPLICATION CONFIGURATION                                         -->
+	<!-- ================================================================= -->
+	<application
+        android:allowBackup="true"
+        android:icon="@mipmap/appicon"
+        android:supportsRtl="true">
+
+		<!-- Google Maps API Key configuration required for map tile rendering and location features -->
+		<meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="YOUR_GOOGLE_MAPS_API_KEY_HERE" />
 
 	</application>
 
-	<!-- Permissions -->
+	<!-- ================================================================= -->
+	<!-- PERMISSIONS REQUIRED FOR NETWORK & LOCATION SERVICES              -->
+	<!-- ================================================================= -->
+
+	<!-- Allows the application to access information about current networks -->
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+	<!-- Required for general internet access (fetching map tiles, API calls, etc.) -->
 	<uses-permission android:name="android.permission.INTERNET" />
+
+	<!-- Allows the app to track location even when running in the background -->
 	<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
+	<!-- Allows the app to access approximate location using Wi-Fi and mobile cell data -->
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+	<!-- Allows the app to access precise GPS location coordinates -->
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
 </manifest>

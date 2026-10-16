@@ -14,6 +14,9 @@ public partial class MainPage : ContentPage
         InitializeComponent();
     }
 
+    /// <summary>
+    /// Handles page appearance by loading logged points from SQLite and centering the map.
+    /// </summary>
     protected override async void OnAppearing()
     {
         base.OnAppearing();
@@ -28,6 +31,9 @@ public partial class MainPage : ContentPage
         await CenterMapOnUserAsync();
     }
 
+    /// <summary>
+    /// Unsubscribes event listeners to prevent memory leaks.
+    /// </summary>
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
@@ -37,6 +43,9 @@ public partial class MainPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Listens for view model property changes and triggers map rendering.
+    /// </summary>
     private void OnViewModelPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(MainViewModel.HeatMapPoints))
@@ -45,6 +54,10 @@ public partial class MainPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Clears existing map elements and renders circular overlays for each tracked GPS point.
+    /// </summary>
+    /// <param name="points">Recorded GPS points retrieved from database persistence</param>
     private void RenderLocationTrail(IEnumerable<LocationPoint> points)
     {
         TrackMap.MapElements.Clear();
@@ -67,6 +80,9 @@ public partial class MainPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Retrieves current geolocation coordinates and moves the map viewport focus.
+    /// </summary>
     private async Task CenterMapOnUserAsync()
     {
         try
@@ -86,7 +102,7 @@ public partial class MainPage : ContentPage
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Error centering map: {ex.Message}");
+            System.Diagnostics.Debug.WriteLine($"Error centering map viewport: {ex.Message}");
         }
     }
 }

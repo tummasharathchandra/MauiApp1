@@ -1,4 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+  MainPage.xaml - Primary UI View for .NET MAUI Location Tracking Application.
+  Defines the screen layout comprising the native map control and an interactive control panel.
+-->
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
@@ -9,22 +13,41 @@
              Shell.BackgroundColor="#512BD4"
              Shell.TitleColor="White">
 
+	<!-- 
+      View Model Binding Context.
+      Instantiates and links MainViewModel to enable two-way data binding and command execution.
+    -->
 	<ContentPage.BindingContext>
 		<vm:MainViewModel />
 	</ContentPage.BindingContext>
 
+	<!-- Main page grid layout with top flexible row for the map and fixed bottom row for controls -->
 	<Grid RowDefinitions="*, Auto">
 
-		<!-- Map Control -->
+		<!-- 
+          Interactive Native Map Element.
+          Renders map tile layer and displays active user location indicator when enabled.
+        -->
 		<maps:Map x:Name="TrackMap"
                   Grid.Row="0"
                   IsShowingUser="True" />
 
-		<!-- Bottom Actions Bar -->
+		<!-- 
+          User Action Control Panel Container.
+          Styled bottom border housing action buttons for controlling GPS tracking and clearing data.
+        -->
 		<Border Grid.Row="1"
                 Padding="12,8"
                 BackgroundColor="#512BD4">
+
+			<!-- Three-column layout for action buttons -->
 			<Grid ColumnDefinitions="*, *, *">
+
+				<!-- 
+                  Start / Stop Tracking Action Button.
+                  Bound to TrackingButtonText for dynamic button labeling ("Start"/"Stop") 
+                  and ToggleTrackingCommand to toggle continuous location polling.
+                -->
 				<Button Grid.Column="0"
                         Text="{Binding TrackingButtonText}"
                         Command="{Binding ToggleTrackingCommand}"
@@ -33,6 +56,11 @@
                         FontAttributes="Bold"
                         Margin="4,0" />
 
+				<!-- 
+                  Refresh Map Action Button.
+                  Executes RefreshHeatMapCommand to fetch stored coordinates from SQLite 
+                  and re-draw circle overlays on the map.
+                -->
 				<Button Grid.Column="1"
                         Text="Refresh Map"
                         Command="{Binding RefreshHeatMapCommand}"
@@ -41,6 +69,11 @@
                         FontAttributes="Bold"
                         Margin="4,0" />
 
+				<!-- 
+                  Clear Data Action Button.
+                  Executes ClearDataCommand to wipe all stored location history from local database 
+                  and remove rendered points from map canvas.
+                -->
 				<Button Grid.Column="2"
                         Text="Clear"
                         Command="{Binding ClearDataCommand}"
